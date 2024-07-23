@@ -21,7 +21,7 @@
       <h1 class="library-name">My Library</h1>
       <div class="books"></div>
     </div>
-    <div id="overlay">
+    <dialog id="form-dialog">
       <form action="" method="post" id="add-book-form">
         <div>
           <label for="title">Book Title</label>
@@ -48,10 +48,11 @@
           <input type="radio" id="have-read" name="have-read-book" value="no" />
           <label for="have-read">No</label>
         </div>
-        <div class="add-btn">
+        <div class="btns">
           <button id="add-book">Add Book</button>
+          <button id="close-btn">Close</button>
         </div>
       </form>
-    </div>
+    </dialog>
   </body>
 </html>
