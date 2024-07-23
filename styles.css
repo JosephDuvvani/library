@@ -1,0 +1,73 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-size: 16px;
+}
+
+.container {
+    display: grid;
+    grid-template-rows: 50px 50px 1fr;
+    align-items: center;
+    min-width: max-content;
+    padding: 0 20px;
+    background-color: lightblue;
+}
+
+.header {
+    grid-row: 1;
+    display: flex;
+    justify-content: space-between;
+    gap: 15px;
+}
+
+.library-name {
+    grid-row: 2;
+}
+
+.books {
+    height: 100vh;
+    background-color:aliceblue;
+    border-radius: 5px;
+}
+
+#add-book-form {
+    display: grid;
+    align-items: center;
+    grid-template-columns: minmax(150px, 500px);
+    grid-template-rows: repeat(5, 1fr);
+    padding: 15px;
+    border: 2px solid #f3f3f3;
+    border-radius: 10px;
+    background-color: #fff;
+}
+
+#add-book-form div:nth-child(1),
+#add-book-form div:nth-child(2),
+#add-book-form div:nth-child(3) {
+    display: grid;
+    grid-template-rows: 1fr 1fr;
+}
+
+.btns {
+    display: grid;
+    grid-template-columns: max-content max-content;
+    gap: 30px;
+}
+
+dialog {
+    border-radius: 15px;
+    border: 1px solid silver;
+    background-color: rgb(41, 180, 180);
+    margin: 50px auto;
+    box-shadow: 2px 5px 8px rgb(0, 0, 0, 0.2);
+}
+
+::backdrop {
+    background: linear-gradient(
+        -55deg,
+        black,
+        white,
+        black
+        );
+        opacity: 0.2;
+}
