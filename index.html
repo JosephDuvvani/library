@@ -9,52 +9,54 @@
   </head>
   <body>
     <div class="container">
-      <input
-        type="search"
-        id="search-library"
-        name="search"
-        placeholder="Search for book..."
-      />
-      <button class="new-book">Add New Book</button>
+      <div class="header">
+        <input
+          type="search"
+          id="search-library"
+          name="search"
+          placeholder="Search for book..."
+        />
+        <button class="new-book">Add New Book</button>
+      </div>
       <h1 class="libraryName">My Library</h1>
       <div class="books"></div>
-      <div id="overlay">
-        <form action="" method="post" id="add-book-form">
-          <div class="form-content">
-            <div>
-              <label for="title">Book Title</label>
-              <input type="text" id="title" name="book_title" required />;
-            </div>
-            <div>
-              <label for="author">Author</label>
-              <input type="text" id="author" name="book_author" required />
-            </div>
-            <div>
-              <label for="pages">Total Pages</label>
-              <input type="text" id="pages" name="book_pages" required />
-            </div>
-            <div>
-              <input
-                type="radio"
-                id="have-read"
-                name="have-read-book"
-                value="yes"
-                required
-              />
-              <label for="have-read">Yes</label>
-
-              <input
-                type="radio"
-                id="have-read"
-                name="have-read-book"
-                value="no"
-              />
-              <label for="have-read">No</label>
-              <button>Add Book</button>
-            </div>
+    </div>
+    <div id="overlay">
+      <form action="" method="post" id="add-book-form">
+        <div class="form-content">
+          <div>
+            <label for="title">Book Title</label>
+            <input type="text" id="title" name="book_title" required />;
           </div>
-        </form>
-      </div>
+          <div>
+            <label for="author">Author</label>
+            <input type="text" id="author" name="book_author" required />
+          </div>
+          <div>
+            <label for="pages">Total Pages</label>
+            <input type="text" id="pages" name="book_pages" required />
+          </div>
+          <div>
+            <input
+              type="radio"
+              id="have-read"
+              name="have-read-book"
+              value="yes"
+              required
+            />
+            <label for="have-read">Yes</label>
+
+            <input
+              type="radio"
+              id="have-read"
+              name="have-read-book"
+              value="no"
+            />
+            <label for="have-read">No</label>
+            <button>Add Book</button>
+          </div>
+        </div>
+      </form>
     </div>
   </body>
 </html>
