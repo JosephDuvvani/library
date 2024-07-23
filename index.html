@@ -23,38 +23,33 @@
     </div>
     <div id="overlay">
       <form action="" method="post" id="add-book-form">
-        <div class="form-content">
-          <div>
-            <label for="title">Book Title</label>
-            <input type="text" id="title" name="book_title" required />;
-          </div>
-          <div>
-            <label for="author">Author</label>
-            <input type="text" id="author" name="book_author" required />
-          </div>
-          <div>
-            <label for="pages">Total Pages</label>
-            <input type="text" id="pages" name="book_pages" required />
-          </div>
-          <div>
-            <input
-              type="radio"
-              id="have-read"
-              name="have-read-book"
-              value="yes"
-              required
-            />
-            <label for="have-read">Yes</label>
+        <div>
+          <label for="title">Book Title</label>
+          <input type="text" id="title" name="book_title" required />;
+        </div>
+        <div>
+          <label for="author">Author</label>
+          <input type="text" id="author" name="book_author" required />
+        </div>
+        <div>
+          <label for="pages">Total Pages</label>
+          <input type="text" id="pages" name="book_pages" required />
+        </div>
+        <div>
+          <input
+            type="radio"
+            id="have-read"
+            name="have-read-book"
+            value="yes"
+            required
+          />
+          <label for="have-read">Yes</label>
 
-            <input
-              type="radio"
-              id="have-read"
-              name="have-read-book"
-              value="no"
-            />
-            <label for="have-read">No</label>
-            <button>Add Book</button>
-          </div>
+          <input type="radio" id="have-read" name="have-read-book" value="no" />
+          <label for="have-read">No</label>
+        </div>
+        <div class="add-btn">
+          <button id="add-book">Add Book</button>
         </div>
       </form>
     </div>
