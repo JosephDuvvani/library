@@ -61,3 +61,73 @@ function displayLibrary() {
     card.appendChild(readStatus);
    }
 }
+
+const showNewBookForm = document.querySelector('.new-book');
+const formDialog = document.querySelector('#form-dialog');
+const closeBtn = document.querySelector('#close-btn');
+const addBook = document.querySelector('#add-book');
+
+showNewBookForm.addEventListener('click', () => {
+    formDialog.showModal();
+});
+
+closeBtn.addEventListener('click', (e) => {
+    e.preventDefault();
+    formDialog.close();
+});
+
+addBook.addEventListener('click', (e) => {
+    e.preventDefault();
+    let inputTitle = document.querySelector('#title');
+    let inputAuthor = document.querySelector('#author');
+    let inputPages = document.querySelector('#pages');
+    let readStatus = document.querySelector('input[name="have-read-book"]:checked');
+
+// Validate input
+    if (inputTitle.value == '' ||
+        inputAuthor.value == '' ||
+        inputPages.value == ''||
+        readStatus == null) {
+            return alert('Form incomplete');
+        }else if (checkOnlySpacesInput(inputTitle.value) || 
+                checkOnlySpacesInput(inputAuthor.value) ||
+                checkOnlySpacesInput(inputPages.value)) {
+                    return alert('Input cannot be only spaces!');
+                }
+
+    let newBook = new Book(inputTitle.value, inputAuthor.value, inputPages.value, readStatus.value);
+    myLibrary.push(newBook);
+    libraryDisplay.textContent = '';
+    displayLibrary();
+    clearForm();
+    formDialog.close();
+});
+
+// Check if input is only spaces
+function checkOnlySpacesInput (input) {
+    let spacesInput = input.split('');
+    let spaceCounter = 0;
+
+    for (let x of spacesInput) {
+        if (x == ' ') spaceCounter++;
+    }
+    if (spaceCounter === input.length){
+        return true;
+    } else {
+        return false;
+    }
+}
+
+// Clear form
+function clearForm () {
+    let inputTitle = document.querySelector('#title');
+    let inputAuthor = document.querySelector('#author');
+    let inputPages = document.querySelector('#pages');
+    let readStatus = document.querySelector('input[name="have-read-book"]:checked');
+
+    inputTitle.value = '';
+    inputAuthor.value = '';
+    inputPages.value = '';
+    readStatus.checked = false;
+}
+
