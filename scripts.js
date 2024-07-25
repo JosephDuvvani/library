@@ -131,3 +131,13 @@ function clearForm () {
     readStatus.checked = false;
 }
 
+// Dummy Books
+let dummyBook = new Book('The Hobbit', 'J.R.R Tolkien', 295, 'yes');
+myLibrary.push(dummyBook);
+let dummyBook2 = new Book('The Hobbit 2', 'J.R.R Tolkien', 299, 'no');
+myLibrary.push(dummyBook2);
+let dummyBook3 = new Book('The Hobbit: The Hobbit of the underground 3', 'J.R.R Tolkien', 299, 'no');
+myLibrary.push(dummyBook3);
+let dummyBook4 = new Book('The Hobbit 4', 'J.R.R Tolkien', 299, 'yes');
+myLibrary.push(dummyBook4);
+displayLibrary();
