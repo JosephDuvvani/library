@@ -161,7 +161,7 @@ dialog {
 
 .author {
     text-decoration: none;
-    color: inherit;
+    color: #F1C40F;
     grid-column: 2;
     grid-row: 2;
     font-size: 18px;
@@ -186,17 +186,27 @@ dialog {
     justify-self: right;
     align-self: end;
     font-size: 12px;
+    color: inherit;
     font-weight: 700;
     padding: 5px;
-    width: 45px;
-    height: 30px;
+    width: 60px;
+    height: 40px;
     border-radius: 2px;
-    border: 2px solid #808080;
+    border: 1px solid #808080;
     text-align: center;
     position: relative;
     left: 20px;
     bottom: 10px;
     z-index: 1;
+    text-shadow: 2px 2px 2px rgb(0, 0, 0, 0.7);
+}
+
+.read-status:hover {
+    cursor: pointer;
+}
+
+.read-status.no {
+    background-color: #f70202;
 }
 
 .delete-btn {

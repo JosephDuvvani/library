@@ -13,8 +13,16 @@ function Book(title, author, pages, haveReadIt) {
 
     this.readStatus = function () {
         let status = '';
-        haveReadIt === 'yes' ? status = 'already read' : status = 'not read yet';
+        this.haveRead === 'yes' ? status = 'already read' : status = 'not read yet';
         return status;
+    }
+}
+
+Book.prototype.changeReadStatus = function () {
+    if (this.haveRead === 'yes') {
+        return this.haveRead = 'no'
+    }else {
+        return this.haveRead = 'yes';
     }
 }
 
@@ -68,12 +76,14 @@ function displayLibrary() {
     pageNum.textContent = book.pages;
     card.appendChild(pageNum);
 
-    let readStatus = document.createElement('div');
-    readStatus.classList.add('read-status');
+    let readStatus = document.createElement('button');
+    readStatus.classList.add('read-status', `${book.haveRead}`);
+    readStatus.setAttribute('data-identifier', book.identifier)
     readStatus.textContent = book.readStatus();
     card.appendChild(readStatus);
    }
    deleteBook();
+   changeStatus();
 }
 
 const showNewBookForm = document.querySelector('.new-book');
@@ -166,5 +176,16 @@ function deleteBook () {
 function resetIdentifiers (index) {
     for (let i = index; i < myLibrary.length; i++) {
         myLibrary[i].identifier = i;
+    }
+}
+
+function changeStatus () {
+    let status = document.querySelectorAll('.read-status')
+    for (let i = 0; i < myLibrary.length; i++) {
+        status[i].addEventListener('click', (e) => {
+            let index = status[i].getAttribute('data-identifier');
+            myLibrary[i].changeReadStatus();
+            displayLibrary();
+        });
     }
 }
