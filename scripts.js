@@ -1,10 +1,12 @@
 const myLibrary = [];
 
+
 function Book(title, author, pages, haveReadIt) {
     this.title = title;
     this.author = author;
     this.pages = pages;
     this.haveRead = haveReadIt;
+    this.identifier;
     this.info = function() {
         return `${title} by ${author}, ${pages} pages, ${this.readStatus()}`;
     };
@@ -18,16 +20,27 @@ function Book(title, author, pages, haveReadIt) {
 
 function addBookToLibrary(title, author, pages, haveReadIt) {
     let newBook = new Book(title, author, pages, haveReadIt);
+    let identifier = myLibrary.length;
+    newBook.identifier = identifier;
     myLibrary.push(newBook);
 }
 
 const libraryDisplay = document.querySelector('.books');
 
 function displayLibrary() {
+   libraryDisplay.textContent = '';
    for(let book of myLibrary){
     let card = document.createElement('div');
     card.classList.add('card');
     libraryDisplay.appendChild(card);
+
+    let deleteBook = document.createElement('button');
+    deleteBook.classList.add('delete-btn');
+    deleteBook.setAttribute('data-identifier', book.identifier);
+    card.appendChild(deleteBook);
+    let svgHTML = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" data-identifier=${book.identifier}><path d="M9,3V4H4V6H5V19A2,2 0 0,0 7,21H17A2,2 0 0,0 19,19V6H20V4H15V3H9M7,6H17V19H7V6M9,8V17H11V8H9M13,8V17H15V8H13Z" data-identifier=${book.identifier} /></svg>`;
+    deleteBook.innerHTML = svgHTML;
+    card.appendChild(deleteBook);
 
     let bookTitle = document.createElement('h1');
     bookTitle.classList.add('book-title');
@@ -60,6 +73,7 @@ function displayLibrary() {
     readStatus.textContent = book.readStatus();
     card.appendChild(readStatus);
    }
+   deleteBook();
 }
 
 const showNewBookForm = document.querySelector('.new-book');
@@ -95,9 +109,7 @@ addBook.addEventListener('click', (e) => {
                     return alert('Input cannot be only spaces!');
                 }
 
-    let newBook = new Book(inputTitle.value, inputAuthor.value, inputPages.value, readStatus.value);
-    myLibrary.push(newBook);
-    libraryDisplay.textContent = '';
+    addBookToLibrary(inputTitle.value, inputAuthor.value, inputPages.value, readStatus.value);
     displayLibrary();
     clearForm();
     formDialog.close();
@@ -132,12 +144,27 @@ function clearForm () {
 }
 
 // Dummy Books
-let dummyBook = new Book('The Hobbit', 'J.R.R Tolkien', 295, 'yes');
-myLibrary.push(dummyBook);
-let dummyBook2 = new Book('The Hobbit 2', 'J.R.R Tolkien', 299, 'no');
-myLibrary.push(dummyBook2);
-let dummyBook3 = new Book('The Hobbit: The Hobbit of the underground 3', 'J.R.R Tolkien', 299, 'no');
-myLibrary.push(dummyBook3);
-let dummyBook4 = new Book('The Hobbit 4', 'J.R.R Tolkien', 299, 'yes');
-myLibrary.push(dummyBook4);
+addBookToLibrary('The Hobbit', 'J.R.R Tolkien', 295, 'yes');
+addBookToLibrary('The Hobbit 2', 'J.R.R Tolkien', 299, 'no');
+addBookToLibrary('The Hobbit: The Hobbit of the underground 3', 'J.R.R Tolkien', 299, 'no');
+addBookToLibrary('The Hobbit 4', 'J.R.R Tolkien', 299, 'yes');
 displayLibrary();
+
+function deleteBook () {
+    let deleteThisBook = document.querySelectorAll('.delete-btn');
+    for(let i = 0; i<deleteThisBook.length; i++) {
+        deleteThisBook[i].addEventListener('click', (e) => {
+            let index = +deleteThisBook[i].getAttribute('data-identifier');
+            let deleteItem = myLibrary.splice(index, 1);
+            resetIdentifiers(index);
+            displayLibrary();
+            alert(`Delete ${deleteItem[0].info()}`);
+        });
+    }
+}
+
+function resetIdentifiers (index) {
+    for (let i = index; i < myLibrary.length; i++) {
+        myLibrary[i].identifier = i;
+    }
+}
