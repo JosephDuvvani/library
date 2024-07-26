@@ -95,11 +95,14 @@ button:hover {
 .library-name {
     grid-row: 2;
     color: #fff;
-    padding: 15px 2px 10px 20px;
-    border-bottom: 2px solid #212121;
+    padding: 15px 2px 0 20px;
     font-family: "Rust", system-ui;
     font-size: 30px;
     width: max-content;
+}
+
+#bg {
+    height: 100%;
 }
 
 .books {
@@ -108,6 +111,21 @@ button:hover {
     grid-template-columns: repeat(auto-fit, 225px);
     grid-auto-rows: minmax(200px, max-content);
     gap: 70px;
+    position: relative;
+    height: 100%;
+    background-image: url(images/rafael-cosquiere.jpg);
+    background-position: center;
+    background-size: cover;
+}
+
+.books::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    box-shadow: inset 0 500px 1000px #181818;
 }
 
 #add-book-form {
@@ -189,6 +207,7 @@ dialog {
     gap: 20px;
     box-sizing: border-box;
     position: relative;
+    z-index: 1;
 }
 
 .book-title {
