@@ -154,10 +154,10 @@ function clearForm () {
 }
 
 // Dummy Books
-addBookToLibrary('The Hobbit', 'J.R.R Tolkien', 295, 'yes');
-addBookToLibrary('The Hobbit 2', 'J.R.R Tolkien', 299, 'no');
-addBookToLibrary('The Hobbit: The Hobbit of the underground 3', 'J.R.R Tolkien', 299, 'no');
-addBookToLibrary('The Hobbit 4', 'J.R.R Tolkien', 299, 'yes');
+addBookToLibrary('To Kill a Mockingbird', 'Harper Lee', 323, 'yes');                         //First published July 11, 1960
+addBookToLibrary('Romeo and Juliet', 'William Shakespeare', 281, 'no');                      //First published January 1, 1597  
+addBookToLibrary('The Great Gatsby', 'F. Scott Fitzgerald', 180, 'yes');                     //First published April 10, 1925
+addBookToLibrary('1984', 'George Orwell', 290, 'no');
 displayLibrary();
 
 function deleteBook () {
