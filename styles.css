@@ -139,6 +139,7 @@ dialog {
     color: #fff;
     gap: 20px;
     box-sizing: border-box;
+    position: relative;
 }
 
 .book-title {
@@ -197,4 +198,29 @@ dialog {
     bottom: 10px;
     z-index: 1;
 }
+
+.delete-btn {
+    width: min-content;
+    position: absolute;
+    top: 0;
+    right: 0;
+    border-style: none;
+    background-color: transparent;
+    border-left: 1px solid rgb(128, 128, 128, 0.7);
+    border-radius: 0 0 0 5px;
+    fill: #fff;
+}
+
+.delete-btn svg {
+    width: 20px;
+    height: 20px;
+    fill: inherit;
+    z-index: 1;
+}
+
+.delete-btn:hover {
+    fill: #ff0000;
+    border-left: 1px solid #f70202;
+    cursor: pointer;
+} 
 
