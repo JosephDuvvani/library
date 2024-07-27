@@ -40,6 +40,7 @@ function displayLibrary() {
    for(let book of myLibrary){
     let card = document.createElement('div');
     card.classList.add('card');
+    card.setAttribute('data-identifier', book.identifier);
     libraryDisplay.appendChild(card);
 
     let deleteBook = document.createElement('button');
@@ -84,6 +85,7 @@ function displayLibrary() {
    }
    deleteBook();
    changeStatus();
+   search();
 }
 
 const showNewBookForm = document.querySelector('.new-book');
@@ -188,4 +190,25 @@ function changeStatus () {
             displayLibrary();
         });
     }
+}
+
+//Search Bar
+function search () {
+    const searchBar = document.querySelector('[data-search]');
+    const cards = document.querySelectorAll('.card');
+
+    searchBar.addEventListener('input', (e) => {
+        const value = e.target.value.toLowerCase();
+        console.log(value)
+        cards.forEach(card => {
+            const identifier = +card.getAttribute('data-identifier');
+            const title = myLibrary[identifier].title.toLowerCase();
+            const author = myLibrary[identifier].author.toLowerCase();
+            console.log(title);
+            console.log(author);
+            const isVisible = title.includes(value) || author.includes(value);
+            card.classList.toggle('hide', !isVisible);
+            console.log(isVisible)
+        })
+    })
 }
