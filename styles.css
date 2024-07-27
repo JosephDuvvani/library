@@ -200,7 +200,7 @@ dialog {
 
 .card {
     display: grid;
-    grid-template-columns: max-content 1fr;
+    grid-template-columns: 75px 120px;
     grid-template-rows: 1fr repeat(2, max-content) 1fr;
     width: 225px;
     height: 275px;
@@ -214,35 +214,45 @@ dialog {
     7px -7px rgb(197, 19, 80,0.2);
     align-items: center;
     color: #fff;
-    gap: 20px;
+    gap: 10px;
     box-sizing: border-box;
     position: relative;
-    /* z-index: 1; */
+}
+
+.book-head {
+    grid-column: 1 / 3;
+    grid-row: 1;
+    position: relative; 
 }
 
 .book-title {
+    display: inline-block;
     font-size: 40px;
-    grid-column: 1 / 3;
-    grid-row: 1;
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
+    width: 100%;
     text-align: center;
     font-family: "Rust", system-ui;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 
 .book-title + .info-label {
     grid-column: 1;
     grid-row: 2;
-    text-align: right;
+}
+
+.name {
+    grid-column: 2;
+    grid-row: 2;
+    position: relative;
 }
 
 .author {
     text-decoration: none;
     color: #F1C40F;
-    grid-column: 2;
-    grid-row: 2;
     font-size: 18px;
+    width: 100%;
+    display: inline-block;
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
@@ -255,7 +265,6 @@ dialog {
 .author + .info-label {
     grid-column: 1;
     grid-row: 3;
-    text-align: right;
 }
 
 .pages {
@@ -264,12 +273,16 @@ dialog {
     font-size: 18px;
 }
 
-.read-status {
-    background-color: #a2c11c;
+.status {
     grid-column: 1 / 3;
     grid-row: 4;
     justify-self: right;
     align-self: end;
+    position: relative;
+}
+
+.read-status {
+    background-color: #a2c11c;
     font-size: 12px;
     color: inherit;
     font-weight: 700;
@@ -282,7 +295,6 @@ dialog {
     position: relative;
     left: 20px;
     bottom: 10px;
-    z-index: 1;
     text-shadow: 2px 2px 2px rgb(0, 0, 0, 0.7);
     transform: skew(-10deg);
 }
@@ -291,11 +303,14 @@ dialog {
     background-color: #f70202;
 }
 
-.delete-btn {
-    width: min-content;
+.trash {
     position: absolute;
     top: 0;
     right: 0;
+}
+
+.delete-btn {
+    width: min-content;
     border-style: none;
     background-color: transparent;
     border-left: 1px solid rgb(128, 128, 128, 0.7);
@@ -320,18 +335,36 @@ dialog {
 }
 
 .msg-box {
+    position: absolute;
     background-color: #fff;
     color: #000;
     font-size: 0.8rem;
     height: min-content;
     width: max-content;
-    font-weight: normal;
     font-family: sans-serif, system-ui;
     border: 1px solid #aaa;
-    padding: 5px 10px;
-    text-shadow: none;
-    position: absolute;
-    left: 80%;
+    padding: 2px 10px;
+    bottom: -15px;
     z-index: 1;
+}
+
+.del-msg {
+    position: absolute;
+    top: 0;
+    right: -15px;
+    top: -30px;
+}
+
+.title-msg {
+    left: 130px;
+}
+
+.author-msg {
+    left: 75px;
+    bottom: -17px;
+}
+
+.status-msg {
+    left: -120px;
 }
 

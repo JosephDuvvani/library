@@ -43,29 +43,57 @@ function displayLibrary() {
     card.setAttribute('data-identifier', book.identifier);
     libraryDisplay.appendChild(card);
 
+    let trash = document.createElement('div');
+    trash.classList.add('trash');
+    card.appendChild(trash);
+
     let deleteBook = document.createElement('button');
     deleteBook.classList.add('delete-btn');
     deleteBook.setAttribute('data-identifier', book.identifier);
-    card.appendChild(deleteBook);
     let svgHTML = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" data-identifier=${book.identifier}><path d="M9,3V4H4V6H5V19A2,2 0 0,0 7,21H17A2,2 0 0,0 19,19V6H20V4H15V3H9M7,6H17V19H7V6M9,8V17H11V8H9M13,8V17H15V8H13Z" data-identifier=${book.identifier} /></svg>`;
     deleteBook.innerHTML = svgHTML;
-    card.appendChild(deleteBook);
+    trash.appendChild(deleteBook);
+
+    let delMsg = document.createElement('span');
+    delMsg.classList.add('msg-box', 'del-msg', 'hide');
+    card.appendChild(delMsg);
+    delMsg.setAttribute('id', `del-${book.identifier}`);
+    let head = document.createElement('div');
+    head.classList.add('book-head');
+    card.appendChild(head);
 
     let bookTitle = document.createElement('h1');
     bookTitle.classList.add('book-title');
+    bookTitle.setAttribute('data-identifier', book.identifier)
     bookTitle.textContent = book.title;
-    card.appendChild(bookTitle);
+    head.appendChild(bookTitle);
+
+    let titleMsg = document.createElement('span');
+    titleMsg.classList.add('msg-box', 'title-msg', 'hide');
+    titleMsg.setAttribute('id', `t-${book.identifier}`);
+    titleMsg.textContent = '';
+    head.appendChild(titleMsg);
 
     let authorLabel = document.createElement('div');
     authorLabel.classList.add('info-label');
     authorLabel.textContent = 'Author:'
     card.appendChild(authorLabel);
 
+    let name = document.createElement('div');
+    name.classList.add('name');
+    card.appendChild(name);
+
     let authorName = document.createElement('a');
     authorName.classList.add('author');
     authorName.setAttribute('href', '#');
+    authorName.setAttribute('data-identifier', book.identifier)
     authorName.textContent = book.author;
-    card.appendChild(authorName);
+    name.appendChild(authorName);
+
+    let authorMsg = document.createElement('span');
+    authorMsg.classList.add('msg-box', 'author-msg', 'hide');
+    authorMsg.setAttribute('id', `au-${book.identifier}`);
+    name.appendChild(authorMsg);
 
     let pagesLabel = document.createElement('div');
     pagesLabel.classList.add('info-label');
@@ -77,16 +105,26 @@ function displayLibrary() {
     pageNum.textContent = book.pages;
     card.appendChild(pageNum);
 
+    let status = document.createElement('div');
+    status.classList.add('status');
+    card.appendChild(status);
+
     let readStatus = document.createElement('button');
     readStatus.classList.add('read-status', `${book.haveRead}`);
     readStatus.setAttribute('data-identifier', book.identifier)
     readStatus.textContent = book.readStatus();
-    card.appendChild(readStatus);
+    status.appendChild(readStatus);
+
+    let statusMsg = document.createElement('span');
+    statusMsg.classList.add('msg-box', 'status-msg', 'hide');
+    statusMsg.setAttribute('id', `st-${book.identifier}`);
+    status.appendChild(statusMsg);
    }
    deleteBook();
    changeStatus();
    search();
    hoverMsg();
+   booksByAuthor();
 }
 
 const showNewBookForm = document.querySelector('.new-book');
@@ -227,27 +265,90 @@ function hoverMsg () {
 }
 
 function msgEvent (nodeList) {
-    const msg = document.createElement('span');
-    msg.classList.add('msg-box');
+    // const cards = document.querySelectorAll('.card');
+    // const msg = document.createElement('span');
+    // msg.classList.add('msg-box');
+    const delMsg = document.querySelectorAll('.del-msg');
+    const titleMsg = document.querySelectorAll('.title-msg');
+    const authorMsg = document.querySelectorAll('.author-msg');
+    const statusMsg = document.querySelectorAll('.status-msg');
+    const msgBoxes = document.querySelectorAll('msg-box');
     
     nodeList.forEach(node => {
         node.addEventListener('mouseenter', () => {
             const nodeClass = node.getAttribute('class');
-            if (nodeClass === 'delete-btn'){
-                msg.textContent = 'Delete book';
+            const identifier = +node.getAttribute('data-identifier');
+            if (nodeClass === 'delete-btn' ||nodeClass === ''){
+                const tracker = `del-${identifier}`;
+                delMsg.forEach(del => {
+                    del.textContent = 'Delete book';
+                    const isVisible = del.getAttribute('id') === tracker;
+                    del.classList.toggle('hide', !isVisible)
+                })
+            }else if (nodeClass === 'book-title') {
+                const tracker = `t-${identifier}`;
+                    titleMsg.forEach(title => {
+                        title.textContent = node.textContent;
+                        const isVisible = title.getAttribute('id') === tracker;
+                        title.classList.toggle('hide', !isVisible)
+                    })
+            }else if (nodeClass === 'author') {
+                const tracker = `au-${identifier}`;
+                    authorMsg.forEach(author => {
+                        author.textContent = node.textContent;
+                        const isVisible = author.getAttribute('id') === tracker;
+                        author.classList.toggle('hide', !isVisible)
+                    })
             }else if (nodeClass === 'read-status yes' ||
-                    nodeClass === 'read-status no') {
-                msg.textContent = 'Click to change status';
-            }else {
-                msg.textContent = node.textContent;
+                nodeClass === 'read-status no') {
+                const tracker = `st-${identifier}`;
+                statusMsg.forEach(status => {
+                    status.textContent = 'Click to change status';
+                    const isVisible = status.getAttribute('id') === tracker;
+                    status.classList.toggle('hide', !isVisible)
+                })
+
             }
-            node.append(msg)
-            msg.classList.toggle('hide', false)
         })
         node.addEventListener('mouseleave', () => {
-            msg.textContent = ''; 
-            node.appendChild(msg)
-            msg.classList.toggle('hide');
+            const nodeClass = node.getAttribute('class');
+            const identifier = +node.getAttribute('data-identifier');
+            if (nodeClass === 'delete-btn'){
+                const tracker = `del-${identifier}`;
+                const msg = document.getElementById(tracker);
+                msg.classList.toggle('hide');
+            }else if (nodeClass === 'book-title') {
+                const tracker = `t-${identifier}`;
+                const msg = document.getElementById(tracker);
+                msg.classList.toggle('hide');
+            }else if (nodeClass === 'author') {
+                const tracker = `au-${identifier}`;
+                const msg = document.getElementById(tracker);
+                msg.classList.toggle('hide');
+            }else if (nodeClass === 'read-status yes' ||
+                nodeClass === 'read-status no') {
+                const tracker = `st-${identifier}`;
+                const msg = document.getElementById(tracker);
+                msg.classList.toggle('hide');
+            }
+        })
+    })
+}
+
+//Author Search
+function booksByAuthor () {
+    const authorLinks = document.querySelectorAll('.author');
+    const cards = document.querySelectorAll('.card');
+
+    authorLinks.forEach(author => {
+        author.addEventListener('click', (e) => {
+            const name = e.target.textContent;
+
+            cards.forEach(card => {
+                const identifier = +card.getAttribute('data-identifier');
+                const isVisible = myLibrary[identifier].author === name;
+                card.classList.toggle('hide', !isVisible);
+            })
         })
     })
 }
