@@ -134,7 +134,6 @@ button:hover {
     grid-template-columns: minmax(min-content, 500px);
     grid-template-rows: repeat(5, 1fr);
     padding: 15px;
-    border: 2px solid #f3f3f3;
     border-radius: 3px;
     background-color: #fffefe;
     gap: 15px;
@@ -179,7 +178,6 @@ button:hover {
 
 dialog {
     border-radius: 5px;
-    border: 1px solid silver;
     background-color: #c51350;
     margin: 50px auto;
     min-width: min-content;
