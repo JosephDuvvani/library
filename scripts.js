@@ -86,6 +86,7 @@ function displayLibrary() {
    deleteBook();
    changeStatus();
    search();
+   hoverMsg();
 }
 
 const showNewBookForm = document.querySelector('.new-book');
@@ -209,6 +210,44 @@ function search () {
             const isVisible = title.includes(value) || author.includes(value);
             card.classList.toggle('hide', !isVisible);
             console.log(isVisible)
+        })
+    })
+}
+
+//Hover Message Box
+function hoverMsg () {
+    const titleElement = document.querySelectorAll('.book-title');
+    const authorElement = document.querySelectorAll('.author');
+    const deleteElement = document.querySelectorAll('.delete-btn');
+    const statusElement = document.querySelectorAll('.read-status');
+    msgEvent(titleElement);
+    msgEvent(authorElement);
+    msgEvent(deleteElement);
+    msgEvent(statusElement);
+}
+
+function msgEvent (nodeList) {
+    const msg = document.createElement('span');
+    msg.classList.add('msg-box');
+    
+    nodeList.forEach(node => {
+        node.addEventListener('mouseenter', () => {
+            const nodeClass = node.getAttribute('class');
+            if (nodeClass === 'delete-btn'){
+                msg.textContent = 'Delete book';
+            }else if (nodeClass === 'read-status yes' ||
+                    nodeClass === 'read-status no') {
+                msg.textContent = 'Click to change status';
+            }else {
+                msg.textContent = node.textContent;
+            }
+            node.append(msg)
+            msg.classList.toggle('hide', false)
+        })
+        node.addEventListener('mouseleave', () => {
+            msg.textContent = ''; 
+            node.appendChild(msg)
+            msg.classList.toggle('hide');
         })
     })
 }

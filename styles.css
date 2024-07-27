@@ -123,6 +123,7 @@ button:hover {
     background-image: url(images/rafael-cosquiere.jpg);
     background-position: center;
     background-size: cover;
+    z-index: 1;
 }
 
 .books::after {
@@ -133,6 +134,7 @@ button:hover {
     width: 100%;
     height: 100%;
     box-shadow: inset 0 500px 1000px #181818;
+    z-index: -1;
 }
 
 #add-book-form {
@@ -215,7 +217,7 @@ dialog {
     gap: 20px;
     box-sizing: border-box;
     position: relative;
-    z-index: 1;
+    /* z-index: 1; */
 }
 
 .book-title {
@@ -315,5 +317,21 @@ dialog {
 
 .hide {
     display: none;
+}
+
+.msg-box {
+    background-color: #fff;
+    color: #000;
+    font-size: 0.8rem;
+    height: min-content;
+    width: max-content;
+    font-weight: normal;
+    font-family: sans-serif, system-ui;
+    border: 1px solid #aaa;
+    padding: 5px 10px;
+    text-shadow: none;
+    position: absolute;
+    left: 80%;
+    z-index: 1;
 }
 
