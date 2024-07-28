@@ -2,4 +2,4 @@
 
 Create a small library app
 
-![alt text](my-library.png)
+![alt text](images/my-library.png)
