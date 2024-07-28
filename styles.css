@@ -108,6 +108,18 @@ button:hover {
     width: max-content;
 }
 
+.library-name .back-to-library {
+    border-style: none;
+    border-radius: 2px;
+    background-color: rgb(255, 255, 255, 0.1);
+    color: #F1C40F;
+    margin-left: 10px;
+    font-size: 16px;  
+    padding: 4px 4px;
+    position: relative;
+    bottom: 4px;
+}
+
 #bg {
     height: 100%;
 }

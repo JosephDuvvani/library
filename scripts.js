@@ -349,6 +349,23 @@ function booksByAuthor () {
                 const isVisible = myLibrary[identifier].author === name;
                 card.classList.toggle('hide', !isVisible);
             })
+            back.classList.toggle('hide', false);
         })
     })
 }
+
+//Back button
+const libraryName = document.querySelector('.library-name');
+const back = document.createElement('button');
+back.classList.add('back-to-library', 'hide');
+back.textContent = '< BACK';
+libraryName.appendChild(back);
+
+//Back button event
+back.addEventListener('click', () => {
+    const books = document.querySelectorAll('.card');
+    books.forEach(book => {
+        book.classList.toggle('hide', false);
+    })
+    back.classList.toggle('hide');
+})
