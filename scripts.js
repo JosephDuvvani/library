@@ -56,7 +56,7 @@ function displayLibrary() {
 
     let delMsg = document.createElement('span');
     delMsg.classList.add('msg-box', 'del-msg', 'hide');
-    card.appendChild(delMsg);
+    trash.appendChild(delMsg);
     delMsg.setAttribute('id', `del-${book.identifier}`);
     let head = document.createElement('div');
     head.classList.add('book-head');
@@ -201,6 +201,7 @@ addBookToLibrary('The Great Gatsby', 'F. Scott Fitzgerald', 180, 'yes');        
 addBookToLibrary('1984', 'George Orwell', 290, 'no');
 displayLibrary();
 
+//Remove a book from library
 function deleteBook () {
     let deleteThisBook = document.querySelectorAll('.delete-btn');
     for(let i = 0; i<deleteThisBook.length; i++) {
@@ -210,7 +211,20 @@ function deleteBook () {
             resetIdentifiers(index);
             displayLibrary();
             alert(`Delete ${deleteItem[0].info()}`);
+            checkHide();
         });
+    }
+}
+
+function checkHide () {
+    const cards = document.querySelectorAll('.card');
+    const by = document.querySelector('.books-by');           
+    if (!by.className.includes('hide')) {
+        cards.forEach(card => {
+            if(card.children[3].children[0].textContent !== by.textContent) {
+                card.classList.toggle('hide');
+            }
+        })
     }
 }
 
@@ -220,6 +234,7 @@ function resetIdentifiers (index) {
     }
 }
 
+//Change book read status
 function changeStatus () {
     let status = document.querySelectorAll('.read-status')
     for (let i = 0; i < myLibrary.length; i++) {
@@ -227,6 +242,7 @@ function changeStatus () {
             let index = status[i].getAttribute('data-identifier');
             myLibrary[i].changeReadStatus();
             displayLibrary();
+            checkHide();
         });
     }
 }
@@ -265,9 +281,6 @@ function hoverMsg () {
 }
 
 function msgEvent (nodeList) {
-    // const cards = document.querySelectorAll('.card');
-    // const msg = document.createElement('span');
-    // msg.classList.add('msg-box');
     const delMsg = document.querySelectorAll('.del-msg');
     const titleMsg = document.querySelectorAll('.title-msg');
     const authorMsg = document.querySelectorAll('.author-msg');
@@ -350,16 +363,23 @@ function booksByAuthor () {
                 card.classList.toggle('hide', !isVisible);
             })
             back.classList.toggle('hide', false);
+            by.textContent = name;
+            by.classList.toggle('hide', false);
         })
     })
 }
 
 //Back button
 const libraryName = document.querySelector('.library-name');
+
 const back = document.createElement('button');
 back.classList.add('back-to-library', 'hide');
 back.textContent = '< BACK';
 libraryName.appendChild(back);
+
+const by = document.createElement('span');
+by.classList.add('books-by', 'hide');
+libraryName.appendChild(by);
 
 //Back button event
 back.addEventListener('click', () => {
@@ -368,4 +388,6 @@ back.addEventListener('click', () => {
         book.classList.toggle('hide', false);
     })
     back.classList.toggle('hide');
+    by.textContent = '';
+    by.classList.toggle('hide');
 })
