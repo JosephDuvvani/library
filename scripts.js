@@ -1,30 +1,31 @@
 const myLibrary = [];
 
+class Book {
+    constructor(title, author, pages, haveReadIt) {
+        this.title = title;
+        this.author = author;
+        this.pages = pages;
+        this.haveRead = haveReadIt;
+        this.identifier;
+        }
+        info() {
+            return `${title} by ${author}, ${pages} pages, ${this.readStatus()}`;
+        }
+    
+        readStatus() {
+            let status = '';
+            this.haveRead === 'yes' ? status = 'already read' : status = 'not read yet';
+            return status;
+        }
 
-function Book(title, author, pages, haveReadIt) {
-    this.title = title;
-    this.author = author;
-    this.pages = pages;
-    this.haveRead = haveReadIt;
-    this.identifier;
-    this.info = function() {
-        return `${title} by ${author}, ${pages} pages, ${this.readStatus()}`;
-    };
-
-    this.readStatus = function () {
-        let status = '';
-        this.haveRead === 'yes' ? status = 'already read' : status = 'not read yet';
-        return status;
+        changeReadStatus() {
+            if (this.haveRead === 'yes') {
+                return this.haveRead = 'no'
+            }else {
+                return this.haveRead = 'yes';
+            }
+        }
     }
-}
-
-Book.prototype.changeReadStatus = function () {
-    if (this.haveRead === 'yes') {
-        return this.haveRead = 'no'
-    }else {
-        return this.haveRead = 'yes';
-    }
-}
 
 function addBookToLibrary(title, author, pages, haveReadIt) {
     let newBook = new Book(title, author, pages, haveReadIt);
